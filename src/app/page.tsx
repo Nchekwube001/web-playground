@@ -87,11 +87,37 @@ export default function Home() {
         <motion.div
           variants={childVariant}
           className="bg-slate-800 aspect-square rounded-lg justify-center flex items-center gap-10"
-        ></motion.div>
+        >
+          <motion.button
+            whileTap={{
+              scale: 0.9,
+            }}
+            whileHover={{
+              scale: 1.1,
+            }}
+            transition={{
+              bounceDamping: 10,
+              bounceStiffness: 600,
+            }}
+            className="bg-emerald-600 w-1/2 py-4 rounded-lg text-2xl text-gray-100 font-light tracking-wide"
+          >
+            Subscribe
+          </motion.button>
+        </motion.div>
         <motion.div
           variants={childVariant}
           className="bg-slate-800 aspect-square rounded-lg justify-center flex items-center gap-10"
-        ></motion.div>
+        >
+          <motion.div
+            className="w-1/3 h-1/3 bg-orange-500 rounded-3xl cursor-grab"
+            drag
+            dragTransition={{
+              bounceStiffness: 600,
+              bounceDamping: 10,
+            }}
+            dragConstraints={{ top: -125, left: -125, right: 125, bottom: 125 }}
+          />
+        </motion.div>
         <motion.div
           variants={childVariant}
           className="bg-slate-800 aspect-square rounded-lg justify-center flex items-center gap-10"
