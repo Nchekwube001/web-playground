@@ -1,6 +1,12 @@
 "use client";
-import Image from "next/image";
-import { motion, useScroll } from "motion/react";
+import { useRef, useEffect } from "react";
+import {
+  motion,
+  useScroll,
+  useInView,
+  useAnimate,
+  usePresence,
+} from "motion/react";
 
 const gridContainerVariants = {
   hidden: { opacity: 0 },
@@ -34,6 +40,33 @@ const svgVariant = {
 };
 export default function Home() {
   const { scrollYProgress: completionProgress } = useScroll();
+  const containerRef = useRef(null);
+  const [scope, animate] = useAnimate();
+  const [isPresent, safeToRemove] = usePresence();
+  const isInView = useInView(scope, {
+    once: true,
+  });
+  useEffect(() => {
+    if (isInView) {
+      animate(scope.current, { opacity: 1 });
+    }
+  }, [isInView]);
+  // console.log({
+  //   mainControls,
+  // });
+  // const mainControls = useAnimate();
+  // console.log({
+  //   mainControls,
+  // });
+
+  // useEffect(() => {
+  //   if (isInView) {
+  //     mainControls.start("visible");
+  //   }
+  // }, []);
+  useEffect(() => {
+    animate("h1", { opacity: 1 });
+  }, []);
 
   return (
     <div className="flex flex-col overflow-x-hidden">
@@ -182,6 +215,35 @@ export default function Home() {
           </motion.svg>
         </motion.div>
       </motion.section>
+
+      <section className="flex flex-col gap-10 mb-10" ref={scope}>
+        <motion.h1
+          className="text-slate-100 font-thin text-5xl tracking-wide text-center"
+          // animate={scope}
+          // initial="hidden"
+          // variants={{
+          //   hidden: { opacity: 0, y: 75 },
+          //   visible: { opacity: 1, y: 0 },
+          // }}
+          // transition={{
+          //   delay: 0.3,
+          // }}
+        >
+          Lets go Web devs
+        </motion.h1>
+        <p className="text-slate-100 font-thin text-4xl w-1/2 mx-auto">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque eveniet
+          nihil nulla impedit nemo illo nisi asperiores voluptates, veritatis
+          ullam nobis labore similique rem aliquid vel, nesciunt quibusdam
+          nostrum quae!
+        </p>
+        <p className="text-slate-100 font-thin text-4xl w-1/2 mx-auto">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque eveniet
+          nihil nulla impedit nemo illo nisi asperiores voluptates, veritatis
+          ullam nobis labore similique rem aliquid vel, nesciunt quibusdam
+          nostrum quae!
+        </p>
+      </section>
     </div>
   );
 }
