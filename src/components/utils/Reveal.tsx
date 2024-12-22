@@ -1,4 +1,3 @@
-import { log } from "console";
 import { motion, useInView, useAnimation } from "motion/react";
 import React, { FC, ReactElement, useEffect, useRef } from "react";
 
