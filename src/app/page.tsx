@@ -7,6 +7,8 @@ import {
   useAnimate,
   usePresence,
 } from "motion/react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const gridContainerVariants = {
   hidden: { opacity: 0 },
@@ -39,6 +41,7 @@ const svgVariant = {
   },
 };
 export default function Home() {
+  const router = useRouter();
   const { scrollYProgress: completionProgress } = useScroll();
   const containerRef = useRef(null);
   const [scope, animate] = useAnimate();
@@ -66,7 +69,7 @@ export default function Home() {
   // }, []);
   useEffect(() => {
     animate("h1", { opacity: 1 });
-  }, []);
+  }, [animate]);
 
   return (
     <div className="flex flex-col overflow-x-hidden">
@@ -136,7 +139,19 @@ export default function Home() {
           variants={childVariant}
           className="bg-slate-800 aspect-square rounded-lg justify-center flex items-center gap-10"
         >
+          {/* <Link href={"/portfolio"}>
+            <p>Press me</p>
+          </Link> */}
           <motion.button
+            // onTap={()=>{
+
+            // }}
+            onClick={() => {
+              // console.log({
+              //   name: router,
+              // });
+              router.push("/portfolio");
+            }}
             whileTap={{
               scale: 0.9,
             }}
