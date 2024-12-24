@@ -150,7 +150,8 @@ export default function Home() {
               // console.log({
               //   name: router,
               // });
-              router.push("/portfolio");
+              router.push("/playground");
+              // router.push("/portfolio");
             }}
             whileTap={{
               scale: 0.9,
